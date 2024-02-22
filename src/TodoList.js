@@ -220,8 +220,8 @@ class TodoList {
   filter(callback) {
     let result = new TodoList(this.title);
 
-    this.todos.filter(callback).forEach((todo) => {
-      result.add(todo);
+    this.forEach((todo) => {
+      if (callback(todo)) result.add(todo);
     });
 
     return result;
