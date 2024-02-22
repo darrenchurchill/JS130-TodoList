@@ -202,7 +202,7 @@ class TodoList {
   /**
    * Execute the provided function once for each todo list item.
    * @param {Function} callback the function to execute for each item in the
-   * todo list.
+   * todo list. The function is called as `callback(todoItem, index)`.
    */
   forEach(callback) {
     this.todos.forEach(callback);
@@ -213,15 +213,15 @@ class TodoList {
    * pass the test implemented in `callback`.
    * @param {Function} callback the function to execute once for each item in
    * the list. It should return a truthy value to include the item in the
-   * resulting list.
+   * resulting list. The function is called as `callback(todoItem, index)`.
    * @returns {TodoList} a shallow copy of this list containing only the items
    * that passed `callback`'s test.
    */
   filter(callback) {
     let result = new TodoList(this.title);
 
-    this.forEach((todo) => {
-      if (callback(todo)) result.add(todo);
+    this.forEach((todo, index) => {
+      if (callback(todo, index)) result.add(todo);
     });
 
     return result;
