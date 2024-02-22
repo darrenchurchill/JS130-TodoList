@@ -198,5 +198,14 @@ class TodoList {
     this._validateIndex(index);
     return this.todos.splice(index, 1)[0];
   }
+
+  /**
+   * Execute the provided function once for each todo list item.
+   * @param {Function} callback the function to execute for each item in the
+   * todo list.
+   */
+  forEach(callback) {
+    this.todos.forEach(callback);
+  }
 }
 
