@@ -207,5 +207,24 @@ class TodoList {
   forEach(callback) {
     this.todos.forEach(callback);
   }
+
+  /**
+   * Return a shallow copy of this list, containing only the `Todo` items that
+   * pass the test implemented in `callback`.
+   * @param {Function} callback the function to execute once for each item in
+   * the list. It should return a truthy value to include the item in the
+   * resulting list.
+   * @returns {TodoList} a shallow copy of this list containing only the items
+   * that passed `callback`'s test.
+   */
+  filter(callback) {
+    let result = new TodoList(this.title);
+
+    this.todos.filter(callback).forEach((todo) => {
+      result.add(todo);
+    });
+
+    return result;
+  }
 }
 
