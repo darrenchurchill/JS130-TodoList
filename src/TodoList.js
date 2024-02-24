@@ -14,6 +14,10 @@ class Todo {
   static DONE_MARKER = "X";
   static UNDONE_MARKER = " ";
 
+  /**
+   * Create a new `Todo`.
+   * @param {string} title this Todo's title
+   */
   constructor(title) {
     this.title = title;
     this.done = false;
@@ -24,18 +28,32 @@ class Todo {
     return `[${marker}] ${this.title}`;
   }
 
+  /**
+   * Mark this `Todo` as "done".
+   */
   markDone() {
     this.done = true;
   }
 
+  /**
+   * Mark this `Todo` as "not done".
+   */
   markUndone() {
     this.done = false;
   }
 
+  /**
+   * Return `true` if this `Todo` is "done".
+   * @returns {boolean} `true` if this `Todo` is "done", `false` otherwise
+   */
   isDone() {
     return this.done;
   }
 
+  /**
+   * Return this `Todo`'s title as a string.
+   * @returns {string} this `Todo`'s title
+   */
   getTitle() {
     return this.title;
   }
