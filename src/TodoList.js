@@ -226,5 +226,67 @@ class TodoList {
 
     return result;
   }
+
+  /**
+   * Return the first `Todo` whose title matches the given string title.
+   * @param {string} title the `Todo` title to search for
+   * @returns {Todo} the first `Todo` with the given title, or `undefined` if
+   * no `Todo` is found.
+   */
+  findByTitle(title) {
+    return this.filter((todo) => todo.getTitle() === title).first();
+  }
+
+  /**
+   * Return a shallow copy of this list containing only the "done" items.
+   * @returns {TodoList} a shallow copy of this list containing only the "done"
+   * `Todo`s
+   */
+  allDone() {
+    return this.filter((todo) => todo.isDone());
+  }
+
+  /**
+   * Return a shallow cope of this list containing only the "not done" items.
+   * @returns {TodoList} a shallow copy of this list containing only the "not
+   * done" `Todo`s
+   */
+  allNotDone() {
+    return this.filter((todo) => !todo.isDone());
+  }
+
+  /**
+   * Mark the first `Todo` whose title matches the given string title as "done".
+   * Do nothing if there are no matching `Todo`s in this list.
+   * @param {string} title the title of the `Todo` to mark as "done"
+   */
+  markDone(title) {
+    let found = this.findByTitle(title);
+    if (found !== undefined) found.markDone();
+  }
+
+  /**
+   * Mark all items in this list as "done".
+   */
+  markAllDone() {
+    this.forEach((todo) => todo.markDone());
+  }
+
+  /**
+   * Mark all items in this list as "not done".
+   */
+  markAllUndone() {
+    this.forEach((todo) => todo.markUndone());
+  }
+
+  /**
+   * Return a shallow copy of this list as an `Array`.
+   * @returns {Array.<Todo>} a shallow copy of this list's `Todo`s as an `Array`
+   */
+  toArray() {
+    let result = [];
+    this.forEach((todo) => result.push(todo));
+    return result;
+  }
 }
 
