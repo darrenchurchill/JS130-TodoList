@@ -306,7 +306,6 @@ describe("TodoList", () => {
             index + 1,
             todo,
             index,
-            todos
           );
         });
       });

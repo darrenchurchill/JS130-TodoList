@@ -158,7 +158,7 @@ class TodoList {
    * todo list. The function is called as `callback(todoItem, index)`.
    */
   forEach(callback) {
-    this.todos.forEach(callback);
+    this.todos.forEach((todo, index) => callback(todo, index));
   }
 
   /**
