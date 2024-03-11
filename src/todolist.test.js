@@ -141,7 +141,7 @@ describe("TodoList", () => {
   describe("TodoList.itemAt()", () => {
     test("throws ReferenceError if index is out of bounds", () => {
       expect(() => list.itemAt(-1)).toThrow(ReferenceError);
-      expect(() => list.itemAt(3)).toThrow(ReferenceError);
+      expect(() => list.itemAt(list.size())).toThrow(ReferenceError);
       expect(() => list.itemAt(9)).toThrow(ReferenceError);
     });
 
@@ -155,7 +155,7 @@ describe("TodoList", () => {
   describe("TodoList.markDoneAt()", () => {
     test("throws ReferenceError if index is out of bounds", () => {
       expect(() => list.markDoneAt(-1)).toThrow(ReferenceError);
-      expect(() => list.markDoneAt(3)).toThrow(ReferenceError);
+      expect(() => list.markDoneAt(list.size())).toThrow(ReferenceError);
       expect(() => list.markDoneAt(9)).toThrow(ReferenceError);
     });
 
@@ -178,7 +178,7 @@ describe("TodoList", () => {
   describe("TodoList.markUndoneAt()", () => {
     test("throws ReferenceError if index is out of bounds", () => {
       expect(() => list.markUndoneAt(-1)).toThrow(ReferenceError);
-      expect(() => list.markUndoneAt(3)).toThrow(ReferenceError);
+      expect(() => list.markUndoneAt(list.size())).toThrow(ReferenceError);
       expect(() => list.markUndoneAt(9)).toThrow(ReferenceError);
     });
 
