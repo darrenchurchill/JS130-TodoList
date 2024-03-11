@@ -46,4 +46,14 @@ describe("TodoList", () => {
       expect(list.first()).toEqual(todo1);
     });
   });
+
+  describe("TodoList.last()", () => {
+    test("empty TodoList returns undefined", () => {
+      expect((new TodoList("Empty List").last())).toBeUndefined();
+    });
+
+    test("3-Todo list returns last Todo", () => {
+      expect(list.last()).toEqual(todo3);
+    });
+  });
 });
