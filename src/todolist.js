@@ -77,6 +77,7 @@ class TodoList {
    * Get the list item at a given index.
    * @param {number} index the zero-based list index to access
    * @returns {Todo} the `Todo` item at the given index
+   * @throws {ReferenceError} if the index is not valid
    */
   itemAt(index) {
     this._validateIndex(index);
@@ -142,6 +143,7 @@ class TodoList {
    * Remove and return a list item at the given index.
    * @param {number} index the item's index in the list
    * @returns {Todo} the item removed
+   * @throws {ReferenceError} if the index is not valid
    */
   removeAt(index) {
     this._validateIndex(index);
