@@ -74,4 +74,22 @@ describe("TodoList", () => {
       expect(list.shift()).toEqual(todo3);
     });
   });
+
+  describe("TodoList.pop()", () => {
+    test("empty TodoList returns undefined", () => {
+      expect((new TodoList("Empty List").pop())).toBeUndefined();
+    });
+
+    test("3-Todo list -> no remaining Todos returns undefined", () => {
+      const size = list.size();
+      for (let _ = 0; _ < size; _ += 1) list.pop();
+      expect(list.pop()).toBeUndefined();
+    });
+
+    test("3-Todo list -> always returns last Todo item", () => {
+      expect(list.pop()).toEqual(todo3);
+      expect(list.pop()).toEqual(todo2);
+      expect(list.pop()).toEqual(todo1);
+    });
+  });
 });
