@@ -177,4 +177,32 @@ describe("TodoList", () => {
       });
     });
   });
+
+  describe("TodoList.markUndoneAt()", () => {
+    test("throws ReferenceError if index is out of bounds", () => {
+      expect(() => list.markUndoneAt(-1)).toThrow(ReferenceError);
+      expect(() => list.markUndoneAt(3)).toThrow(ReferenceError);
+      expect(() => list.markUndoneAt(9)).toThrow(ReferenceError);
+    });
+
+    test('marks Todo at given index as "undone"', () => {
+      let todos = [todo1, todo2, todo3];
+
+      for (let index = 0; index < list.size(); index += 1) {
+        todos.forEach((todo) => todo.markDone());
+        list.markUndoneAt(index);
+        expect(list.itemAt(index).isDone()).toBe(false);
+      }
+    });
+
+    test('marks only the Todo at given index as "undone"', () => {
+      let todos = [todo1, todo2, todo3];
+
+      todos.forEach((_, index) => {
+        todos.forEach((todo) => todo.markDone());
+        list.markUndoneAt(index);
+        expect(list.toArray().filter((todo) => !todo.isDone()).length).toBe(1);
+      });
+    });
+  });
 });
