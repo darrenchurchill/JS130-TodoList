@@ -56,4 +56,22 @@ describe("TodoList", () => {
       expect(list.last()).toEqual(todo3);
     });
   });
+
+  describe("TodoList.shift()", () => {
+    test("empty TodoList returns undefined", () => {
+      expect((new TodoList("Empty List").shift())).toBeUndefined();
+    });
+
+    test("3-Todo list -> no remaining Todos returns undefined", () => {
+      const size = list.size();
+      for (let _ = 0; _ < size; _ += 1) list.shift();
+      expect(list.shift()).toBeUndefined();
+    });
+
+    test("3-Todo list -> always returns first Todo item", () => {
+      expect(list.shift()).toEqual(todo1);
+      expect(list.shift()).toEqual(todo2);
+      expect(list.shift()).toEqual(todo3);
+    });
+  });
 });
