@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 "use strict";
 
 const { Todo, TodoList } = require("./todolist.js");
@@ -20,7 +21,19 @@ describe("TodoList", () => {
     list.add(todo3);
   });
 
-  test("list has a size of 3", () => {
-    expect(list.size()).toBe(3);
+  describe("TodoList.size()", () => {
+    test("list has a size of 3", () => {
+      expect(list.size()).toBe(3);
+    });
+  });
+
+  describe("TodoList.toArray()", () => {
+    test("empty TodoList returns empty array", () => {
+      expect((new TodoList("Empty List").toArray())).toEqual([]);
+    });
+
+    test("3-Todo list returns array with 3 Todos", () => {
+      expect(list.toArray()).toEqual([todo1, todo2, todo3]);
+    });
   });
 });
