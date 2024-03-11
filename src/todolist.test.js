@@ -135,4 +135,18 @@ describe("TodoList", () => {
       expect(() => list.add(new TodoList("empty list"))).toThrow(TypeError);
     });
   });
+
+  describe("TodoList.itemAt()", () => {
+    test("throws ReferenceError if index is out of bounds", () => {
+      expect(() => list.itemAt(-1)).toThrow(ReferenceError);
+      expect(() => list.itemAt(3)).toThrow(ReferenceError);
+      expect(() => list.itemAt(9)).toThrow(ReferenceError);
+    });
+
+    test("returns reference to Todo at given index", () => {
+      [todo1, todo2, todo3].forEach((todo, index) => {
+        expect(list.itemAt(index)).toBe(todo);
+      });
+    });
+  });
 });
