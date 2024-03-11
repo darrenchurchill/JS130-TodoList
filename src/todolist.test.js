@@ -284,4 +284,32 @@ describe("TodoList", () => {
       );
     });
   });
+
+  describe("TodoList callback methods", () => {
+    let callback;
+
+    beforeEach(() => {
+      callback = jest.fn();
+    });
+
+    describe("TodoList.forEach()", () => {
+      test("calls the provided callback exactly size() number of times", () => {
+        const size = list.size();
+        list.forEach(callback);
+        expect(callback).toHaveBeenCalledTimes(size);
+      });
+
+      test("calls the provided callback with the correct arguments", () => {
+        list.forEach(callback);
+        todos.forEach((todo, index) => {
+          expect(callback).toHaveBeenNthCalledWith(
+            index + 1,
+            todo,
+            index,
+            todos
+          );
+        });
+      });
+    });
+  });
 });
