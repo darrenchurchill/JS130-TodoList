@@ -210,4 +210,29 @@ describe("TodoList", () => {
       expect(todos.every((todo) => todo.isDone())).toBe(true);
     });
   });
+
+  describe("TodoList.removeAt()", () => {
+    test("throws ReferenceError if index is out of bounds", () => {
+      expect(() => list.removeAt(-1)).toThrow(ReferenceError);
+      expect(() => list.removeAt(list.size())).toThrow(ReferenceError);
+      expect(() => list.removeAt(9)).toThrow(ReferenceError);
+    });
+
+    test("returns the Todo item at the given index", () => {
+      const size = list.size();
+
+      for (let index = 0; index < size; index += 1) {
+        expect(list.removeAt(0)).toBe(todos[index]);
+      }
+    });
+
+    test("removes the Todo item at the given index", () => {
+      const size = list.size();
+
+      for (let count = 1; count <= size; count += 1) {
+        let todo = list.removeAt(0);
+        expect(list.toArray()).not.toContain(todo);
+      }
+    });
+  });
 });
