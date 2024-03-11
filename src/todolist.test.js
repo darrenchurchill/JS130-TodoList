@@ -6,10 +6,11 @@ const { Todo, TodoList } = require("./todolist.js");
 
 describe("TodoList", () => {
   let
-    /** @type {Todo} */      todo1,
-    /** @type {Todo} */      todo2,
-    /** @type {Todo} */      todo3,
-    /** @type {TodoList} */  list;
+    /** @type {Todo} */          todo1,
+    /** @type {Todo} */          todo2,
+    /** @type {Todo} */          todo3,
+    /** @type {Array.<Todo>} */  todos,
+    /** @type {TodoList} */      list;
 
   beforeEach(() => {
     todo1 = new Todo("Buy milk");
@@ -18,6 +19,8 @@ describe("TodoList", () => {
     todo2.markUndone();
     todo3 = new Todo("Go to the gym");
     todo3.markUndone();
+
+    todos = [todo1, todo2, todo3];
 
     list = new TodoList("Today's Todos");
     list.add(todo1);
@@ -37,7 +40,7 @@ describe("TodoList", () => {
     });
 
     test("3-Todo list returns array with 3 Todos", () => {
-      expect(list.toArray()).toEqual([todo1, todo2, todo3]);
+      expect(list.toArray()).toEqual(todos);
     });
   });
 
@@ -104,8 +107,6 @@ describe("TodoList", () => {
 
     describe("3-Todo list -> returns false if any Todos aren't done", () => {
       test("1 Todo not done; all others done", () => {
-        let todos = [todo1, todo2, todo3];
-
         todos.forEach((todo) => {
           todos.forEach((todo) => todo.markDone());
           todo.markUndone();
@@ -114,8 +115,6 @@ describe("TodoList", () => {
       });
 
       test("1 Todo done; all others not done", () => {
-        let todos = [todo1, todo2, todo3];
-
         todos.forEach((todo) => {
           todos.forEach((todo) => todo.markUndone());
           todo.markDone();
@@ -125,7 +124,7 @@ describe("TodoList", () => {
     });
 
     test("3-Todo list -> returns true if all Todos are done", () => {
-      [todo1, todo2, todo3].forEach((todo) => todo.markDone());
+      todos.forEach((todo) => todo.markDone());
       expect(list.isDone()).toBe(true);
     });
   });
@@ -147,7 +146,7 @@ describe("TodoList", () => {
     });
 
     test("returns reference to Todo at given index", () => {
-      [todo1, todo2, todo3].forEach((todo, index) => {
+      todos.forEach((todo, index) => {
         expect(list.itemAt(index)).toBe(todo);
       });
     });
@@ -168,8 +167,6 @@ describe("TodoList", () => {
     });
 
     test('marks only the Todo at given index as "done"', () => {
-      let todos = [todo1, todo2, todo3];
-
       todos.forEach((_, index) => {
         todos.forEach((todo) => todo.markUndone());
         list.markDoneAt(index);
@@ -186,8 +183,6 @@ describe("TodoList", () => {
     });
 
     test('marks Todo at given index as "undone"', () => {
-      let todos = [todo1, todo2, todo3];
-
       for (let index = 0; index < list.size(); index += 1) {
         todos.forEach((todo) => todo.markDone());
         list.markUndoneAt(index);
@@ -196,8 +191,6 @@ describe("TodoList", () => {
     });
 
     test('marks only the Todo at given index as "undone"', () => {
-      let todos = [todo1, todo2, todo3];
-
       todos.forEach((_, index) => {
         todos.forEach((todo) => todo.markDone());
         list.markUndoneAt(index);
