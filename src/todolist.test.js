@@ -1,3 +1,4 @@
+/* eslint-disable max-nested-callbacks */
 /* eslint-disable max-lines-per-function */
 "use strict";
 
@@ -90,6 +91,39 @@ describe("TodoList", () => {
       expect(list.pop()).toEqual(todo3);
       expect(list.pop()).toEqual(todo2);
       expect(list.pop()).toEqual(todo1);
+    });
+  });
+
+  describe("TodoList.isDone()", () => {
+    test("empty TodoList returns true", () => {
+      expect((new TodoList("Empty List").isDone())).toBe(true);
+    });
+
+    describe("3-Todo list -> returns false if any Todos aren't done", () => {
+      test("1 Todo not done; all others done", () => {
+        let todos = [todo1, todo2, todo3];
+
+        todos.forEach((todo) => {
+          todos.forEach((todo) => todo.markDone());
+          todo.markUndone();
+          expect(list.isDone()).toBe(false);
+        });
+      });
+
+      test("1 Todo done; all others not done", () => {
+        let todos = [todo1, todo2, todo3];
+
+        todos.forEach((todo) => {
+          todos.forEach((todo) => todo.markUndone());
+          todo.markDone();
+          expect(list.isDone()).toBe(false);
+        });
+      });
+    });
+
+    test("3-Todo list -> returns true if all Todos are done", () => {
+      [todo1, todo2, todo3].forEach((todo) => todo.markDone());
+      expect(list.isDone()).toBe(true);
     });
   });
 });
