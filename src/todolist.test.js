@@ -235,4 +235,53 @@ describe("TodoList", () => {
       }
     });
   });
+
+  describe("TodoList.toString()", () => {
+    test("all Todos undone -> returns correct string representation", () => {
+      expect(list.toString()).toBe(
+      // eslint-disable-next-line indent
+`---- Today's Todos ----
+[ ] Buy milk
+[ ] Clean room
+[ ] Go to the gym
+`
+      );
+    });
+
+    test("first Todo done -> returns correct string representation", () => {
+      list.markDoneAt(0);
+      expect(list.toString()).toBe(
+      // eslint-disable-next-line indent
+`---- Today's Todos ----
+[X] Buy milk
+[ ] Clean room
+[ ] Go to the gym
+`
+      );
+    });
+
+    test("second Todo done -> returns correct string representation", () => {
+      list.markDoneAt(1);
+      expect(list.toString()).toBe(
+      // eslint-disable-next-line indent
+`---- Today's Todos ----
+[ ] Buy milk
+[X] Clean room
+[ ] Go to the gym
+`
+      );
+    });
+
+    test("all Todos done -> returns correct string representation", () => {
+      list.markAllDone();
+      expect(list.toString()).toBe(
+      // eslint-disable-next-line indent
+`---- Today's Todos ----
+[X] Buy milk
+[X] Clean room
+[X] Go to the gym
+`
+      );
+    });
+  });
 });
