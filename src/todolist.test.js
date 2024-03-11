@@ -36,4 +36,14 @@ describe("TodoList", () => {
       expect(list.toArray()).toEqual([todo1, todo2, todo3]);
     });
   });
+
+  describe("TodoList.first()", () => {
+    test("empty TodoList returns undefined", () => {
+      expect((new TodoList("Empty List").first())).toBeUndefined();
+    });
+
+    test("3-Todo list returns first Todo", () => {
+      expect(list.first()).toEqual(todo1);
+    });
+  });
 });
