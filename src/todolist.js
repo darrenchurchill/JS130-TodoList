@@ -100,6 +100,7 @@ class TodoList {
   /**
    * Mark the item at `index` as done.
    * @param {number} index the item's index in the list
+   * @throws {ReferenceError} if the index is not valid
    */
   markDoneAt(index) {
     this.itemAt(index).markDone();
@@ -108,6 +109,7 @@ class TodoList {
   /**
    * Mark the item at `index` as undone.
    * @param {number} index the item's index in the list
+   * @throws {ReferenceError} if the index is not valid
    */
   markUndoneAt(index) {
     this.itemAt(index).markUndone();
