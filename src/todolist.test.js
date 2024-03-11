@@ -198,4 +198,16 @@ describe("TodoList", () => {
       });
     });
   });
+
+  describe("TodoList.markAllDone()", () => {
+    test("does nothing on empty TodoList", () => {
+      expect(() => (new TodoList("empty list")).markAllDone()).not.toThrow();
+      expect((new TodoList("empty list")).markAllDone()).toBeUndefined();
+    });
+
+    test('marks all Todo items as "done"', () => {
+      list.markAllDone();
+      expect(todos.every((todo) => todo.isDone())).toBe(true);
+    });
+  });
 });
