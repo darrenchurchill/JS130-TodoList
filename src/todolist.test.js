@@ -289,7 +289,7 @@ describe("TodoList", () => {
     let callback;
 
     beforeEach(() => {
-      callback = jest.fn();
+      callback = jest.fn(() => true);
     });
 
     describe("TodoList.forEach()", () => {
@@ -301,6 +301,51 @@ describe("TodoList", () => {
 
       test("calls the provided callback with the correct arguments", () => {
         list.forEach(callback);
+        todos.forEach((todo, index) => {
+          expect(callback).toHaveBeenNthCalledWith(
+            index + 1,
+            todo,
+            index,
+          );
+        });
+      });
+    });
+
+    describe("TodoList.filter()", () => {
+      test("returns a TodoList object", () => {
+        expect(list.filter(callback)).toEqual(expect.any(TodoList));
+      });
+
+      test("returns an equivalent TodoList, given a non-filtering callback", () => {
+        expect(list.filter(callback)).toEqual(list);
+      });
+
+      test("returns an empty TodoList, given an all-filtering callback", () => {
+        expect(list.filter(() => false)).toEqual(new TodoList("Today's Todos"));
+      });
+
+      test("returns a filtered TodoList, given a conditionally filtering callback", () => {
+        todo2.markDone();
+        let otherList = new TodoList("Today's Todos");
+        expect(list.filter((todo) => todo.isDone())).not.toEqual(otherList);
+        otherList.add(todo2);
+        expect(list.filter((todo) => todo.isDone())).toEqual(otherList);
+      });
+
+      test("returns a TodoList with shallow copied Todo items", () => {
+        list.filter(callback).forEach((todo) => {
+          expect(todos).toContain(todo);
+        });
+      });
+
+      test("calls the provided callback exactly size() number of times", () => {
+        const size = list.size();
+        list.filter(callback);
+        expect(callback).toHaveBeenCalledTimes(size);
+      });
+
+      test("calls the provided callback with the correct arguments", () => {
+        list.filter(callback);
         todos.forEach((todo, index) => {
           expect(callback).toHaveBeenNthCalledWith(
             index + 1,
