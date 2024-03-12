@@ -18,7 +18,7 @@ class Todo {
    * @param {string} title this Todo's title
    */
   constructor(title) {
-    this.title = title;
+    this.title = String(title);
     this.done = false;
   }
 
