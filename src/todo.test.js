@@ -22,4 +22,10 @@ describe("Todo", () => {
       expect(todo.toString()).toBe("[X] Buy milk");
     });
   });
+
+  describe("Todo.isDone()", () => {
+    test('a Todo is created as "not done"', () => {
+      expect(todo.isDone()).toBe(false);
+    });
+  });
 });
