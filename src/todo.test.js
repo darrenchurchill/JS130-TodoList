@@ -37,4 +37,11 @@ describe("Todo", () => {
       expect((new Todo({})).getTitle()).toBe(String({}));
     });
   });
+
+  describe("Todo.markDone()", () => {
+    test('marking a Todo "done" changes its isDone() state', () => {
+      todo.markDone();
+      expect(todo.isDone()).toBe(true);
+    });
+  });
 });
