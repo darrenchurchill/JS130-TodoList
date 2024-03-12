@@ -196,6 +196,30 @@ describe("TodoList", () => {
     });
   });
 
+  describe("TodoList.markDone()", () => {
+    test('marks the Todo as "done" when there is one with the given title', () => {
+      todos.forEach((todo) => {
+        list.markDone(todo.getTitle());
+        expect(todo.isDone()).toBe(true);
+      });
+    });
+
+    test("does nothing when there is no Todo with the given title", () => {
+      expect(() => (new TodoList("empty list")).markDone("doesn't exist")).not.toThrow();
+      expect(() => list.markDone("doesn't exist")).not.toThrow();
+      expect((new TodoList("empty list")).markDone("doesn't exist")).toBeUndefined();
+      expect(list.markDone("doesn't exist")).toBeUndefined();
+    });
+
+    test("marks the first Todo found when there are > 1 with the given title", () => {
+      let todo4 = new Todo(todo1.getTitle());
+      list.add(todo4);
+      list.markDone(todo1.getTitle());
+      expect(todo1.isDone()).toBe(true);
+      expect(todo4.isDone()).toBe(false);
+    });
+  });
+
   describe("TodoList.markAllDone()", () => {
     test("does nothing on empty TodoList", () => {
       expect(() => (new TodoList("empty list")).markAllDone()).not.toThrow();
