@@ -44,4 +44,13 @@ describe("Todo", () => {
       expect(todo.isDone()).toBe(true);
     });
   });
+
+  describe("Todo.markUndone()", () => {
+    test('marking a Todo "not done" changes its isDone() state', () => {
+      todo.markDone();
+      expect(todo.isDone()).toBe(true);
+      todo.markUndone();
+      expect(todo.isDone()).toBe(false);
+    });
+  });
 });
