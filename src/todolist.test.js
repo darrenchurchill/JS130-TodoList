@@ -208,6 +208,18 @@ describe("TodoList", () => {
     });
   });
 
+  describe("TodoList.markAllUndone()", () => {
+    test("does nothing on empty TodoList", () => {
+      expect(() => (new TodoList("empty list")).markAllUndone()).not.toThrow();
+      expect((new TodoList("empty list")).markAllUndone()).toBeUndefined();
+    });
+
+    test('marks all Todo items as "not done"', () => {
+      list.markAllUndone();
+      expect(todos.every((todo) => !todo.isDone())).toBe(true);
+    });
+  });
+
   describe("TodoList.removeAt()", () => {
     test("throws ReferenceError if index is out of bounds", () => {
       expect(() => list.removeAt(-1)).toThrow(ReferenceError);
