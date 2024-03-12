@@ -408,4 +408,38 @@ describe("TodoList", () => {
       });
     });
   });
+
+  describe("TodoList.allNotDone()", () => {
+    describe('when no Todos are "done"', () => {
+      test("returns an equivalent TodoList", () => {
+        expect((new TodoList("empty list")).allNotDone()).toEqual(new TodoList("empty list"));
+        expect(list.allNotDone()).toEqual(list);
+      });
+
+      test("returns a shallow copy", () => {
+        let otherList = new TodoList("Today's Todos");
+        todos.forEach((todo) => otherList.add(todo));
+        expect(list.allNotDone()).not.toBe(list);
+        expect(list.allNotDone()).toEqual(otherList);
+      });
+    });
+
+    describe('when all Todos are "done"', () => {
+      test("returns an empty TodoList", () => {
+        list.markAllDone();
+        expect(list.allNotDone()).toEqual(new TodoList("Today's Todos"));
+      });
+    });
+
+    describe('when some Todos are "done" and some "not done"', () => {
+      test('returns a TodoList with only the "not done" Todos', () => {
+        let otherList = new TodoList("Today's Todos");
+        todo2.markDone();
+        todos
+          .filter((todo) => !todo.isDone())
+          .forEach((todo) => otherList.add(todo));
+        expect(list.allNotDone()).toEqual(otherList);
+      });
+    });
+  });
 });
