@@ -28,4 +28,13 @@ describe("Todo", () => {
       expect(todo.isDone()).toBe(false);
     });
   });
+
+  describe("Todo.getTitle()", () => {
+    test("a Todo's title is the string value it's constructed with", () => {
+      expect((new Todo("title")).getTitle()).toBe("title");
+      expect((new Todo()).getTitle()).toBe("undefined");
+      expect((new Todo(1)).getTitle()).toBe("1");
+      expect((new Todo({})).getTitle()).toBe(String({}));
+    });
+  });
 });
