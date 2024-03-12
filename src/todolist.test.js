@@ -353,4 +353,24 @@ describe("TodoList", () => {
       });
     });
   });
+
+  describe("TodoList.findByTitle()", () => {
+    test("returns the Todo when there is one with the given title", () => {
+      expect(list.findByTitle(todo1.getTitle())).toBe(todo1);
+      expect(list.findByTitle(todo2.getTitle())).toBe(todo2);
+      expect(list.findByTitle(todo3.getTitle())).toBe(todo3);
+    });
+
+    test("returns undefined when there is no Todo with the given title", () => {
+      expect((new TodoList("empty list")).findByTitle("doesn't exist")).toBeUndefined();
+      expect(list.findByTitle("doesn't exist")).toBeUndefined();
+    });
+
+    test("returns the first Todo found when there are > 1 with the given title", () => {
+      let todo4 = new Todo(todo1.getTitle());
+      list.add(todo4);
+      expect(list.findByTitle(todo1.getTitle())).toBe(todo1);
+      expect(list.findByTitle(todo1.getTitle())).not.toBe(todo4);
+    });
+  });
 });
