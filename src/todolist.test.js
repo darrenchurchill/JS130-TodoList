@@ -14,11 +14,8 @@ describe("TodoList", () => {
 
   beforeEach(() => {
     todo1 = new Todo("Buy milk");
-    todo1.markUndone();
     todo2 = new Todo("Clean room");
-    todo2.markUndone();
     todo3 = new Todo("Go to the gym");
-    todo3.markUndone();
 
     todos = [todo1, todo2, todo3];
 
