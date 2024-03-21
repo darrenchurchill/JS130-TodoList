@@ -2,7 +2,7 @@
 /* eslint-disable max-lines-per-function */
 "use strict";
 
-const { Todo, TodoList } = require("./todolist.js");
+const { Todo, TodoList } = require("../lib/todolist.js");
 
 describe("TodoList", () => {
   let
