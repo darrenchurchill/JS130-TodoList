@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "babel": "babel lib --out-dir dist --presets=@babel/env"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
